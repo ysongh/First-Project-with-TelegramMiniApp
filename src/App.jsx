@@ -1,6 +1,8 @@
-
+import WebApp from '@twa-dev/sdk';
 
 function App() {
+  WebApp.ready();
+  WebApp.expand();
 
   return (
     <>
@@ -11,4 +13,4 @@ function App() {
   )
 }
 
-export default App
+export default App;
