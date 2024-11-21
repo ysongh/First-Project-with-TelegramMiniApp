@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { User, Settings, Star, Globe } from 'lucide-react';
 
 const ProfileItem = ({ icon, label, value }) => (
   <div className="flex items-center space-x-4 bg-gray-100 p-3 rounded-lg">
     <div className="w-10 flex justify-center">
-      -
+      {icon}
     </div>
     <div>
       <div className="text-sm font-medium text-gray-600">{label}</div>
@@ -92,21 +93,25 @@ const TelegramProfile = () => {
 
       <div className="space-y-4">
         <ProfileItem
+          icon={<User className="text-blue-500" />}
           label="Name"
           value={`${userInfo.firstName} ${userInfo.lastName || ''}`}
         />
 
         <ProfileItem
+          icon={<Globe className="text-green-500" />}
           label="Language"
           value={userInfo.languageCode}
         />
 
         <ProfileItem
+          icon={<Settings className="text-purple-500" />}
           label="Username"
           value={userInfo.username || 'Not set'}
         />
 
         <ProfileItem
+          icon={<Star className="text-yellow-500" />}
           label="Premium"
           value={userInfo.isPremium ? 'Yes' : 'No'}
         />
