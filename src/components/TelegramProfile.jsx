@@ -1,5 +1,17 @@
 import React, { useState, useEffect } from 'react';
 
+const ProfileItem = ({ icon, label, value }) => (
+  <div className="flex items-center space-x-4 bg-gray-100 p-3 rounded-lg">
+    <div className="w-10 flex justify-center">
+      -
+    </div>
+    <div>
+      <div className="text-sm font-medium text-gray-600">{label}</div>
+      <div className="font-semibold">{value}</div>
+    </div>
+  </div>
+);
+
 const TelegramProfile = () => {
   const [userInfo, setUserInfo] = useState(null);
   const [themeInfo, setThemeInfo] = useState(null);
@@ -67,13 +79,42 @@ const TelegramProfile = () => {
   }
 
   return (
-    <div>
-      <p>{userInfo.firstName} {userInfo.lastName}</p>
-      <p>@{userInfo.username || 'No username set'}</p>
-      <p>{userInfo.isPremium ? 'Premium User' : 'Standard User'}</p>
-      <p>Language: {userInfo.languageCode?.toUpperCase()}</p>
-      <p>Theme: {themeInfo.colorScheme}</p>
-      <p>ID: {userInfo.id}</p>
+    <div 
+      className="p-6 max-w-md mx-auto"
+      style={{
+        backgroundColor: themeInfo?.backgroundColor || 'white',
+        color: themeInfo?.textColor || 'black'
+      }}
+    >
+      <div className="text-center mb-6">
+        <h2 className="text-2xl font-bold">User Profile</h2>
+      </div>
+
+      <div className="space-y-4">
+        <ProfileItem
+          label="Name"
+          value={`${userInfo.firstName} ${userInfo.lastName || ''}`}
+        />
+
+        <ProfileItem
+          label="Language"
+          value={userInfo.languageCode}
+        />
+
+        <ProfileItem
+          label="Username"
+          value={userInfo.username || 'Not set'}
+        />
+
+        <ProfileItem
+          label="Premium"
+          value={userInfo.isPremium ? 'Yes' : 'No'}
+        />
+      </div>
+
+      <div className="mt-6 text-sm text-gray-500 text-center">
+        User ID: {userInfo.id}
+      </div>
     </div>
   );
 };
