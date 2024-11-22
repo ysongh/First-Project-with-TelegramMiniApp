@@ -9,7 +9,7 @@ function App() {
 
   return (
     <>
-      <h1 className='text-center text-2xl'>
+      <h1 className='text-center text-2xl text-green-500'>
         First Project with Telegram Mini App
       </h1>
       {/* <Counter /> */}
