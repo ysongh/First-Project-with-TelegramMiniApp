@@ -2,6 +2,7 @@ import WebApp from '@twa-dev/sdk';
 
 import Counter from './components/Counter';
 import TelegramProfile from './components/TelegramProfile';
+import TelegramBotMessaging from './components/TelegramBotMessaging';
 
 function App() {
   WebApp.ready();
@@ -13,7 +14,7 @@ function App() {
         First Project with Telegram Mini App
       </h1>
       {/* <Counter /> */}
-      <TelegramProfile />
+      <TelegramBotMessaging />
     </>
   )
 }
