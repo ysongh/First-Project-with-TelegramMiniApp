@@ -28,7 +28,6 @@ const TelegramBotMessaging = () => {
     setStatus('');
 
     try {
-      const BOT_TOKEN = {BOT_TOKEN};
       const CHAT_ID = userInfo.id; // User's Telegram ID
 
       const response = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
