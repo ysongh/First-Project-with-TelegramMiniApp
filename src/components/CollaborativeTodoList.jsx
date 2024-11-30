@@ -5,6 +5,19 @@ function CollaborativeTodoList() {
   const [newTodo, setNewTodo] = useState('');
   const [todos, setTodos] = useState([]);
 
+  const addTodo = () => {
+    if (newTodo.trim()) {
+      const newTodoItem = {
+        id: Date.now(),
+        text: newTodo,
+        completed: false,
+        assignedTo: telegramWebApp?.initDataUnsafe?.user?.username || 'Anonymous'
+      };
+      setTodos([...todos, newTodoItem]);
+      setNewTodo('');
+    }
+  };
+
   return (
     <div className="max-w-md mx-auto p-4 bg-white rounded-lg shadow-md">
       <h1 className="text-2xl font-bold mb-4 text-center">Collaborative Todo List</h1>
@@ -18,6 +31,7 @@ function CollaborativeTodoList() {
           className="flex-grow mr-2 p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
         <button
+          onClick={addTodo} 
           className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
         >
           Add
