@@ -11,7 +11,7 @@ function CollaborativeTodoList() {
         id: Date.now(),
         text: newTodo,
         completed: false,
-        assignedTo: telegramWebApp?.initDataUnsafe?.user?.username || 'Anonymous'
+        assignedTo: 'Anonymous'
       };
       setTodos([...todos, newTodoItem]);
       setNewTodo('');
