@@ -4,6 +4,7 @@ import { Trash2, Edit, CheckCircle } from 'lucide-react';
 function CollaborativeTodoList() {
   const [newTodo, setNewTodo] = useState('');
   const [todos, setTodos] = useState([]);
+  const [editingId, setEditingId] = useState(null);
 
   const addTodo = () => {
     if (newTodo.trim()) {
@@ -16,6 +17,20 @@ function CollaborativeTodoList() {
       setTodos([...todos, newTodoItem]);
       setNewTodo('');
     }
+  };
+
+  const startEditing = (todo) => {
+    setEditingId(todo.id);
+    setNewTodo(todo.text);
+  };
+
+  const saveEditedTodo = () => {
+    const updatedTodos = todos.map(todo => 
+      todo.id === editingId ? { ...todo, text: newTodo } : todo
+    );
+    setTodos(updatedTodos);
+    setEditingId(null);
+    setNewTodo('');
   };
 
   const deleteTodo = (id) => {
@@ -35,12 +50,21 @@ function CollaborativeTodoList() {
           placeholder="Enter a new todo item"
           className="flex-grow mr-2 p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
-        <button
-          onClick={addTodo} 
-          className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
-        >
-          Add
-        </button>
+        {editingId ? (
+          <button 
+            onClick={saveEditedTodo} 
+            className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600"
+          >
+            Save
+          </button>
+        ) : (
+          <button 
+            onClick={addTodo} 
+            className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+          >
+            Add
+          </button>
+        )}
     </div>
 
       <div className="space-y-2">
