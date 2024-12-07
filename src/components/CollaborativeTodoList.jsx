@@ -19,6 +19,13 @@ function CollaborativeTodoList() {
     }
   };
 
+  const toggleTodo = (id) => {
+    const updatedTodos = todos.map(todo => 
+      todo.id === id ? { ...todo, completed: !todo.completed } : todo
+    );
+    setTodos(updatedTodos);
+  };
+
   const startEditing = (todo) => {
     setEditingId(todo.id);
     setNewTodo(todo.text);
