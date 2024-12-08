@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Trash2, Edit, CheckCircle } from 'lucide-react';
+import { Trash2, Edit, Clock, CheckCircle } from 'lucide-react';
 
 function CollaborativeTodoList() {
   const [newTodo, setNewTodo] = useState('');
@@ -88,6 +88,10 @@ function CollaborativeTodoList() {
               <div className="text-sm">{todo.text}</div>
               <div className="text-xs text-gray-500">
                 Added by: {todo.assignedTo}
+              </div>
+              <div className="text-xs text-gray-500 flex items-center">
+                <Clock size={12} className="mr-1" />
+                {new Date(todo.id).toLocaleString()}
               </div>
             </div>
             <div className="flex space-x-2">
