@@ -1,10 +1,36 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Trash2, Edit, Clock, CheckCircle } from 'lucide-react';
 
 function CollaborativeTodoList() {
   const [newTodo, setNewTodo] = useState('');
   const [todos, setTodos] = useState([]);
   const [editingId, setEditingId] = useState(null);
+  const [userInfo, setUserInfo] = useState(null);
+
+  useEffect(() => {
+    if (!window.Telegram?.WebApp) {
+      setError('Telegram WebApp is not properly initialized');
+      return;
+    }
+
+    const webapp = window.Telegram.WebApp;
+
+    // Initialize the app
+    try {
+      webapp.ready();
+      webapp.expand();
+
+      // Get user data
+      const initData = webapp.initDataUnsafe;
+      if (initData.user) {
+        setUserInfo({
+          username: initData.user.username,
+        });
+      }
+    } catch (err) {
+      setError(err.message);
+    }
+  }, []);
 
   const addTodo = () => {
     if (newTodo.trim()) {
@@ -12,7 +38,7 @@ function CollaborativeTodoList() {
         id: Date.now(),
         text: newTodo,
         completed: false,
-        assignedTo: 'Anonymous'
+        assignedTo: userInfo?.username || 'Anonymous'
       };
       setTodos([...todos, newTodoItem]);
       setNewTodo('');
